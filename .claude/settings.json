@@ -19,6 +19,21 @@
         "JIRA_API_TOKEN": "$JIRA_API_TOKEN",
         "JIRA_PROJECT_KEY": "$JIRA_PROJECT_KEY"
       }
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "$GITHUB_TOKEN"
+      }
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    },
+    "fetch": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-fetch"]
     }
   },
   "hooks": {
@@ -27,7 +42,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/abewong/DEV/agentic-workflow/hooks/ingest.sh heartbeat"
+            "command": "/absolute/path/to/project/.hooks/ingest.sh heartbeat"
           }
         ]
       }
@@ -38,7 +53,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/abewong/DEV/agentic-workflow/hooks/ingest.sh heartbeat"
+            "command": "/absolute/path/to/project/.hooks/ingest.sh heartbeat"
           }
         ]
       }
@@ -48,7 +63,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/abewong/DEV/agentic-workflow/hooks/ingest.sh stop"
+            "command": "/absolute/path/to/project/.hooks/ingest.sh stop"
           }
         ]
       }

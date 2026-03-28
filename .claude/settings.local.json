@@ -2,10 +2,23 @@
   "permissions": {
     "allow": [
       "Bash(npm install:*)",
-      "Bash(npx tsc:*)",
       "Bash(npm run:*)",
-      "Bash(curl -s http://localhost:3000/api/data)",
-      "Bash(python3 -c \":*)"
+      "Bash(npx tsc:*)",
+      "Bash(npx drizzle-kit:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git checkout:*)",
+      "Bash(git push:*)",
+      "Bash(git branch:*)",
+      "Bash(git pull:*)",
+      "Bash(curl -s http://localhost:3000/api/*)",
+      "Bash(curl -s -X POST http://localhost:3000/api/*)",
+      "Bash(python3 -c:*)",
+      "Bash(python3 -:*)",
+      "Bash(chmod +x:*)"
     ]
   }
 }

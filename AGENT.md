@@ -14,13 +14,12 @@ Claude operates as a Senior Engineer agent: autonomous on all code-level decisio
 On every session start (or after conversation compaction), Claude must load context in this order:
 
 1. **PROJECT.md** — always read first; this is the authoritative source of requirements. Everything stems from this.
-2. **CONFIG.md** — read immediately after PROJECT.md. Contains the per-project context stream protocol. Follow the **Session Start steps defined inside CONFIG.md** — they are the authoritative sequence for this project and override the generic list below.
-3. **AGENT.md** — this file; load if context was compacted or session is fresh.
-4. **FEATURE.md** — load to understand current backlog and pick the next iteration target.
-5. **DICT.md** — read if available; defines project-specific function patterns and naming conventions.
-6. **SPEC.md** — read if available; defines acceptance criteria and test expectations for each feature.
+2. **AGENT.md** — this file; load if context was compacted or session is fresh.
+3. **FEATURE.md** — load to understand current backlog and pick the next iteration target.
+4. **DICT.md** — read if available; defines project-specific function patterns and naming conventions.
+5. **SPEC.md** — read if available; defines acceptance criteria and test expectations for each feature.
 
-**If CONFIG.md is absent: hard stop.** Do not begin any work. Prompt the human to trigger `[START]` so CLAUDE-PM can run the setup interaction and write CONFIG.md. No iteration resumes without it.
+Stream type (A: Jira/Confluence integration, B: MD-only) is determined by which skill was invoked (`/start-stream` or `/start`). If unclear, ask the human before proceeding.
 
 Read each file once. Refer back only when unclear. Do not access `node_modules` or other large directories unless actively bug-fixing.
 
@@ -41,12 +40,12 @@ When prompted as CLAUDE-PM, Claude is operating in project manager mode, governe
 
 **CLAUDE-PM operating rules:**
 - PROJECT.md is the only authoritative input. CLAUDE-PM does not invent requirements.
-- Reads PROJECT.md, CONFIG.md, SPEC.md (if available), and current FEATURE.md (if exists).
+- Reads PROJECT.md, SPEC.md (if available), and current FEATURE.md (if exists).
 - Decomposes PROJECT.md requirements into discrete, implementable feature entries — one batch at a time.
 - Assigns priority order based on dependencies and project goals stated in PROJECT.md.
 - Generates or updates SPEC.md AC items and DICT.md entries for the new batch.
 - Does not implement code. CLAUDE-PM writes and updates `.md` files only.
-- **Batch start, feature draft, and completion assessment steps are defined in CONFIG.md.** Follow the Context Stream Protocol written there. See CLAUDE-PM.md for stream-specific detail.
+- Stream-specific steps (Jira/Confluence calls, ticket creation, etc.) are defined in the invoked skill (`/start-stream` or `/start`). Follow those steps.
 - Human reviews and confirms FEATURE.md before the engineering iteration loop begins.
 
 ```
@@ -181,13 +180,11 @@ All features [x] done or terminal state?
 
 When conversation is compacted or a session restarts with no prior context, Claude-as-engineer must:
 
-1. Read PROJECT.md.
-2. Read CONFIG.md — **if absent, hard stop**. Prompt human to trigger `[START]` for CLAUDE-PM setup.
-3. Follow the Session Start steps defined in CONFIG.md to load remaining context and stream-specific files.
-4. Perform a repo scan as a stocktake — compare current codebase state against FEATURE.md backlog entries.
-5. Reconcile: identify what is implemented vs. what FEATURE.md says is in progress or todo.
-6. If Claude can determine current state with confidence, resume iteration from the correct feature.
-7. If state is ambiguous or context is insufficient to continue safely — **hard stop**. Flag to human with a summary of what is known and what is unclear before proceeding.
+1. Read PROJECT.md, AGENT.md, FEATURE.md, DICT.md, SPEC.md in order.
+2. Perform a repo scan as a stocktake — compare current codebase state against FEATURE.md backlog entries.
+3. Reconcile: identify what is implemented vs. what FEATURE.md says is in progress or todo.
+4. If Claude can determine current state with confidence, resume iteration from the correct feature.
+5. If state is ambiguous or context is insufficient to continue safely — **hard stop**. Flag to human with a summary of what is known and what is unclear before proceeding.
 
 ---
 
