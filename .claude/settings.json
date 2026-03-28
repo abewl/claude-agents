@@ -1,0 +1,57 @@
+{
+  "mcpServers": {
+    "confluence": {
+      "command": "npx",
+      "args": ["-y", "mcp-confluence"],
+      "env": {
+        "CONFLUENCE_URL": "$CONFLUENCE_URL",
+        "CONFLUENCE_USERNAME": "$CONFLUENCE_USERNAME",
+        "CONFLUENCE_API_TOKEN": "$CONFLUENCE_API_TOKEN",
+        "CONFLUENCE_SPACE_KEY": "$CONFLUENCE_SPACE_KEY"
+      }
+    },
+    "jira": {
+      "command": "npx",
+      "args": ["-y", "mcp-jira"],
+      "env": {
+        "JIRA_URL": "$JIRA_URL",
+        "JIRA_USERNAME": "$JIRA_USERNAME",
+        "JIRA_API_TOKEN": "$JIRA_API_TOKEN",
+        "JIRA_PROJECT_KEY": "$JIRA_PROJECT_KEY"
+      }
+    }
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/abewong/DEV/agentic-workflow/hooks/ingest.sh heartbeat"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/abewong/DEV/agentic-workflow/hooks/ingest.sh heartbeat"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/abewong/DEV/agentic-workflow/hooks/ingest.sh stop"
+          }
+        ]
+      }
+    ]
+  }
+}

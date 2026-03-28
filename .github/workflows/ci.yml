@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "feature/**"
+      - "fix/**"
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ── Install dependencies ──────────────────────────────────────────────
+      # Replace with your package manager and runtime setup.
+      # Examples:
+      #   Node:   actions/setup-node + npm ci
+      #   Python: actions/setup-python + pip install -r requirements.txt
+      #   Go:     actions/setup-go + go mod download
+      - name: Install dependencies
+        run: |
+          # npm ci
+          # pip install -r requirements.txt
+          echo "TODO: add install step"
+
+      # ── Lint ─────────────────────────────────────────────────────────────
+      # Replace with your linter command.
+      # Examples: npm run lint | flake8 . | golangci-lint run
+      - name: Lint
+        run: |
+          # npm run lint
+          echo "TODO: add lint step"
+
+      # ── Tests + coverage ─────────────────────────────────────────────────
+      # Replace with your test command.
+      # Examples: npm test -- --coverage | pytest --cov | go test ./...
+      - name: Test
+        run: |
+          # npm test -- --coverage
+          echo "TODO: add test step"
+
+      # ── Claude Code PR review ─────────────────────────────────────────────
+      # Runs on pull_request events only. Reviews against CLAUDE.md standards
+      # and SPEC.md acceptance criteria. Requires ANTHROPIC_API_KEY secret.
+      - name: Claude Code Review
+        if: github.event_name == 'pull_request'
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          task: |
+            Review this PR against CLAUDE.md coding standards and SPEC.md acceptance criteria.
+            Check for: coverage gaps, failing AC items, code quality issues, hardcoded secrets,
+            and any direct commits to main. Comment with a structured summary.

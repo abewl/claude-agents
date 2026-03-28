@@ -1,0 +1,6 @@
+# Per-project Confluence context cache — never committed
+# Reset with: rm -rf context/
+context/
+
+# OS
+.DS_Store
