@@ -18,7 +18,9 @@
       "Bash(curl -s -X POST http://localhost:3000/api/*)",
       "Bash(python3 -c:*)",
       "Bash(python3 -:*)",
-      "Bash(chmod +x:*)"
+      "Bash(chmod +x:*)",
+      "Bash(find /Users/abewong/DEV/claude-agents -type d -not -path */.* -not -path */node_modules*)",
+      "Bash(grep -v \"^$\")"
     ]
   }
 }

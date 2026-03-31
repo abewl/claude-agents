@@ -14,9 +14,6 @@ FEATURE.md — feature backlog.
 2. Do not write code. Only create and update .md files.
 3. If PROJECT.md context is missing, read it.
 4. On compacted conversation, read PROJECT.md, AGENT.md, FEATURE.md in order.
-5. Stream type is set by which skill was invoked — `/stream-a` (Jira + Confluence) or `/stream-b` (MD-only). Follow that skill's protocol.
+5. Agentic Workflow is which skill was invoked: /start (Ad hooc loop) or /start-stream (Full agent loop with JIRA and Confluence integration). Follow that skill's protocol.
 
-<task>
-    Create implementation for below and verify with user before continuing with development.
-    Replicate Claude /usage usage dashboard as part of the Instance dashboard, currently comprising of Instance name and hook status, followed by feature backlog and then followed by this new usage dashboard. Replicate the UI as well but make it suit the current  Nextjs layout approach. This usage dashboard should be updated and triggered 3 seconds after Claude has finished its last task or response.
-    Each instance should have their own usage dashboard as well. And if it's not connected, it will not displayed yet.
+<tasks>
