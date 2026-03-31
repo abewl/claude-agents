@@ -23,12 +23,6 @@ Stream type (A: Jira/Confluence integration, B: MD-only) is determined by which 
 
 Read each file once. Refer back only when unclear. Do not access `node_modules` or other large directories unless actively bug-fixing.
 
-### Bypass Mode
-
-- `[bypass]` — Skip re-reading context docs. Proceed directly with the task as stated. Respond normally.
-
----
-
 ## CLAUDE-PM Protocol — FEATURE.md Authoring
 
 When prompted as CLAUDE-PM, Claude is operating in project manager mode, governed by `CLAUDE-PM.md`. Its sole responsibility is maintaining FEATURE.md as a living backlog derived from PROJECT.md.
@@ -198,7 +192,11 @@ When conversation is compacted or a session restarts with no prior context, Clau
 ### Coding Standards
 - Follow conventions defined in PROJECT.md and DICT.md.
 - No magic numbers. Explicit error handling. No hardcoded secrets.
-- No direct commits to `main`. All work goes through a feature branch and PR.
+
+### Git Operations
+- Claude may only run git commands on feature branches (`feature/**`, `fix/**`), `develop`, and `staging`.
+- Claude must never push to or run any git command targeting `main`, `master`, or `production`. This includes `git push`, `git merge`, `git rebase`, `git reset`, `git cherry-pick`, and any force variants.
+- Commit messages must not include any Claude authorship signatures, co-author lines, watermarks, model identifiers, or AI-generated attribution of any kind.
 
 ### Testing
 - Write unit tests alongside source code.

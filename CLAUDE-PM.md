@@ -9,9 +9,6 @@ SPEC.md — acceptance criteria glossary.
 AGENT.md — agent runbook.
 FEATURE.md — feature backlog.
 
-<bypass>
-When prompted with [bypass] skip re-reading context docs and complete the task as asked. On a fresh session with no PROJECT.md context, confirm with the user before proceeding.
-
 <guide>
 1. Do not access node_modules or large directories.
 2. Do not write code. Only create and update .md files.

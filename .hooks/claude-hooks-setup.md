@@ -4,7 +4,7 @@ Connects a Claude Code session to the observability dashboard via three lifecycl
 
 ---
 
-## Prerequisites
+<!--## Prerequisites
 
 Set these env vars in your shell profile (`~/.zshrc` or `~/.bashrc`):
 
@@ -119,4 +119,4 @@ cp /path/to/this/repo/.claude/settings.json .claude/
 chmod +x hooks/ingest.sh
 ```
 
-Set env vars with a unique `CLAUDE_ACCOUNT_LABEL` — the dashboard shows a separate card per label.
+Set env vars with a unique `CLAUDE_ACCOUNT_LABEL` — the dashboard shows a separate card per label.-->

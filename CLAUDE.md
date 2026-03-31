@@ -15,6 +15,3 @@ FEATURE.md is feature backlog over which Claude should iterate over multiple CLA
 4. when you complete your task create changelog_vxx.md (xx is number) and update with task summary and the baked in response of your action summary.
 
 <tasks>
-
-<pass check>
-simple for now, no runtime or compile errors
