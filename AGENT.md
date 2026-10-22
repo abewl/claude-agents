@@ -16,8 +16,9 @@ On every session start (or after conversation compaction), Claude must load cont
 1. **PROJECT.md** — always read first; this is the authoritative source of requirements. Everything stems from this.
 2. **AGENT.md** — this file; load if context was compacted or session is fresh.
 3. **FEATURE.md** — load to understand current backlog and pick the next iteration target.
-4. **DICT.md** — read if available; defines project-specific function patterns and naming conventions.
-5. **SPEC.md** — read if available; defines acceptance criteria and test expectations for each feature.
+4. **EPICS.md** — read if available; defines epics for larger projects that consists of multiple features in a feature batch.
+5. **DICT.md** — read if available; defines project-specific function patterns and naming conventions.
+6. **SPEC.md** — read if available; defines acceptance criteria and test expectations for each feature.
 
 Stream type (A: Jira/Confluence integration, B: MD-only) is determined by which skill was invoked (`/start-stream` or `/start`). If unclear, ask the human before proceeding.
 
@@ -99,7 +100,7 @@ Every feature entry in FEATURE.md is bound to one or more AC items in SPEC.md. T
 FEATURE.md must contain a formal backlog. Each entry uses this structure:
 
 ```markdown
-## F-XX: [Feature Name]
+## F-XX: [Feature Name] [Date created] [Date complete]
 - Status: [ ] todo | [~] in progress | [x] done | [!] blocked | [-] deprecated
 - AC: AC-XX, AC-XX, AC-XX
 - Ticket: PROJ-XXX   ← populated by CLAUDE-PM in Stream A; left blank in Stream B
@@ -197,6 +198,12 @@ When conversation is compacted or a session restarts with no prior context, Clau
 - Claude may only run git commands on feature branches (`feature/**`, `fix/**`), `develop`, and `staging`.
 - Claude must never push to or run any git command targeting `main`, `master`, or `production`. This includes `git push`, `git merge`, `git rebase`, `git reset`, `git cherry-pick`, and any force variants.
 - Commit messages must not include any Claude authorship signatures, co-author lines, watermarks, model identifiers, or AI-generated attribution of any kind.
+
+### Commit and Branch Strategy
+- Claude never merges to main
+- Working branch shared by human and Cluade is develop
+- Claude creates feature branches when working on feature batch or epics
+- Human merges in develop for clean starting point for next features
 
 ### Testing
 - Write unit tests alongside source code.
